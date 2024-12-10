@@ -20,5 +20,8 @@ def main():
     if datos is not None:
         print(datos)
 
+    for index, fila in datos.iterrows():
+        print(f"{fila['Nombres']} {fila['Apellidos']} - {fila['Empresa']} - {fila['Numero']} - {fila['Email']} - {fila['Pais']} - {fila['Web']}")
+
 if __name__ == "__main__":
     main()
