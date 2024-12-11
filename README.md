@@ -6,7 +6,7 @@
 2. **Dependencias**:
    - Instala las siguientes librerías ejecutando:
      ```bash
-     pip install selenium pandas openpyxl
+     pip install selenium pandas
      ```
 3. **Navegador y Driver**:
    - **Google Chrome**: Instala la última versión del navegador.
@@ -33,8 +33,8 @@ FormularioAutomatizado/
 
 1. **Clonar el repositorio** (opcional):
    ```bash
-   git clone <url_del_repositorio>
-   cd FormularioAutomatizado
+   git clone https://github.com/ingandresochoa/ArenaRPAchallenge
+   cd ArenaRPAchallenge
    ```
 
 2. **Ejecutar el script**:
