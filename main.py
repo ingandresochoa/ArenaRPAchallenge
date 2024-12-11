@@ -14,7 +14,7 @@ class FormularioAutomatizado:
     def iniciar_navegador(self):
         self.driver.get("https://arenarpa.com/crazy-form")
         self.driver.maximize_window()
-        time.sleep(10)
+        time.sleep(2)
     
     def cerrar_navegador(self):
         self.driver.quit()
@@ -32,19 +32,33 @@ def leer_datos_excel(ruta_archivo, nombre_hoja = 0):
     
 def main():
     
+    # lectura de datos
     ruta_archivo = "C:\\Users\\andre\\OneDrive\\Escritorio\\dev\\ArenaRPAchallenge\\Arena RPA FormData.xlsx"
-    
     datos = leer_datos_excel(ruta_archivo)
 
     if datos is not None:
         print(datos)
 
-    for index, fila in datos.iterrows():
-        print(f"{fila['Nombres']} {fila['Apellidos']} - {fila['Empresa']} - {fila['Numero']} - {fila['Email']} - {fila['Pais']} - {fila['Web']}")
-
+    # automatizacion
     bot = FormularioAutomatizado()
     try:
         bot.iniciar_navegador()
+
+        for index, fila in datos.iterrows():
+            print(f"{fila['Nombres']} {fila['Apellidos']} - {fila['Empresa']} - {fila['Numero']} - {fila['Email']} - {fila['Pais']} - {fila['Web']}")
+            
+            bot.driver.find_element(By.ID, "nombres").send_keys(fila['Nombres'])
+            bot.driver.find_element(By.ID, "apellidos").send_keys(fila['Apellidos'])
+            bot.driver.find_element(By.ID, "empresa").send_keys(fila['Empresa'])
+            bot.driver.find_element(By.ID, "numero").send_keys(fila['Numero'])
+            bot.driver.find_element(By.ID, "email").send_keys(fila['Email'])
+            bot.driver.find_element(By.ID, "pais").send_keys(fila['Pais'])
+            bot.driver.find_element(By.ID, "web").send_keys(fila['Web'])
+            botones = bot.driver.find_elements(By.TAG_NAME, 'button')
+            for boton in botones:
+                if "Enviar" in boton.text:
+                    boton.click()
+        
         bot.cerrar_navegador()
     finally:
         bot.cerrar_navegador()
